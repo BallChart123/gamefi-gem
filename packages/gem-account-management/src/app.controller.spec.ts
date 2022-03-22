@@ -1,22 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService } from './authenticate/Authenicate.service';
+import { Authenicate } from './app.controller';
+import { AuthenicateService } from './authenticate/Authenicate.service';
 
-describe('AppController', () => {
-  let appController: AppController;
+describe('authenicate', () => {
+  let authenicate: Authenicate;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService],
+      controllers: [Authenicate],
+      providers: [AuthenicateService],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    authenicate = app.get<Authenicate>(Authenicate);
   });
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+      expect(authenicate.verifyToken()).toBe('Hello World!');
     });
   });
 });
