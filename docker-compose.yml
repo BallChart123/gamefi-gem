@@ -1,0 +1,57 @@
+version: "3.8"
+services:
+  gem-account-management:
+    container_name: gem-account-management
+    image: gem-account-management
+    build:
+      context: ./packages/gem-account-management
+    ports:
+      - "3000:3000"
+    environment:
+      - PGUSER=admin
+      - PGPASSWORD=admin
+      - PGDATABASE=gem_account_management
+      - PGHOST=gem_account_management_db
+    depends_on:
+      - gem_account_management_db
+  gem-transaction-processor:
+    container_name: gem-transaction-processor
+    image: gem-transaction-processor
+    build:
+      context: ./packages/gem-transaction-processor
+    ports:
+      - "3001:3000"
+    environment:
+      - PGUSER=admin
+      - PGPASSWORD=admin
+      - PGDATABASE=gem_transaction_processor
+      - PGHOST=gem_transaction_processor_db
+    depends_on:
+      - gem_transaction_processor_db
+  gem_account_management_db:
+    container_name: gem_account_management_db
+    image: "postgres:12"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=gem_account_management_db
+    volumes:
+      - gem_account_management_db_data:/var/lib/postgresql/data
+  gem_transaction_processor_db:
+    container_name: gem_transaction_processor_db
+    image: "postgres:12"
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=gem_transaction_processor_db
+      - POSTGRES_PORT=5432
+    volumes:
+      - gem_transaction_processor_db_data:/var/lib/postgresql/data
+
+volumes:
+  gem_account_management_db_data: {}
+  gem_transaction_processor_db_data: {}

@@ -2,7 +2,7 @@
 
 
 
-
+### sequence diagram
 
 ``` mermaid 
 sequenceDiagram
@@ -16,4 +16,51 @@ sequenceDiagram
 ```
 
 
+### Data Flow
 
+``` mermaid
+
+classDiagram
+    class transaction{
+        +transaction_id
+        book
+        +journal_id
+        debit
+        credit
+        account_id
+        timestamp
+        datetime
+
+
+    }
+    class user {
+        +account_id
+        firstname
+        lastname
+        
+    }
+    class balance {
+        +account_id
+        +transaction_id
+        +balance
+        created_at
+        book
+
+    }
+    class journal{
+        +journal_id
+        book
+        datetime
+        transaction
+
+    }
+    class book {
+        name
+    }
+   
+  journal --* transaction
+  book --* balance
+  book --* journal
+  balance --* transaction
+  user --* book
+```
