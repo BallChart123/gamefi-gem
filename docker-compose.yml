@@ -8,10 +8,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - PGUSER=admin
-      - PGPASSWORD=admin
-      - PGDATABASE=gem_account_management
-      - PGHOST=gem_account_management_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=gem_account_management_db
+      - POSTGRES_HOST=gem_account_processor_db
     depends_on:
       - gem_account_management_db
   gem-transaction-processor:
@@ -22,12 +22,18 @@ services:
     ports:
       - "3001:3000"
     environment:
-      - PGUSER=admin
-      - PGPASSWORD=admin
-      - PGDATABASE=gem_transaction_processor
-      - PGHOST=gem_transaction_processor_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=gem_transaction_processor_db
+      - POSTGRES_HOST=gem_transaction_processor_db
+      - REDIS_HOST=cache
+      - REDIS_PORT=6379
+
+    # database server
     depends_on:
       - gem_transaction_processor_db
+      - cache
+
   gem_account_management_db:
     container_name: gem_account_management_db
     image: "postgres:12"
@@ -51,7 +57,16 @@ services:
       - POSTGRES_PORT=5432
     volumes:
       - gem_transaction_processor_db_data:/var/lib/postgresql/data
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server
+    volumes:
+      - redis_cache:/data
 
 volumes:
   gem_account_management_db_data: {}
   gem_transaction_processor_db_data: {}
+  redis_cache: {}
