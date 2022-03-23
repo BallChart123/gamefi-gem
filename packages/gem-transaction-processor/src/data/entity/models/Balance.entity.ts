@@ -3,13 +3,13 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Balance {
     @PrimaryGeneratedColumn("uuid")
-    account_id: number;
+    account_id: string;
 
-    @Column('string')
-    book
+    @Column('varchar')
+    book: string;
 
     @Column('uuid')
-    transaction_id
+    transaction_id: string;
 
     @Column('decimal')
     balance: number;

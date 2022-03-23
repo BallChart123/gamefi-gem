@@ -1,9 +1,11 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Book {
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
-    @Column('string')
-    name
+    @Column('varchar')
+    name: string;
 
 }

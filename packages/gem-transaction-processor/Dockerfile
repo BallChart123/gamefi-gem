@@ -5,7 +5,7 @@ RUN yarn install && yarn build && ls -alsR dist
 
 FROM node:14 AS runner
 WORKDIR /app
-ENV PORT=3001
+ENV PORT=3000
 EXPOSE ${PORT}
 COPY --from=builder /build/dist/ .
 COPY --from=builder /build/package.json .

@@ -20,8 +20,8 @@ export class BookController {
         return await this.bookService.findBook();
     }
     @Get(':id')
-    async findAlbum(@Param('name') name: string): Promise<Book> {
-        return await this.bookService.findOneBook(name);
+    async findAlbum(@Param('id') id: string): Promise<Book> {
+        return await this.bookService.findOneBook(id);
     }
 
     @Put(':name')

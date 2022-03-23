@@ -55,6 +55,7 @@ classDiagram
 
     }
     class book {
+        +id
         name
     }
    

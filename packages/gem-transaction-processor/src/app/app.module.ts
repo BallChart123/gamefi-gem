@@ -1,20 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Book } from 'data/entity/models/Book.entity';
 import { BookModule } from 'module/book/book.module';
+import { ConfigModule } from '@nestjs/config';
+
+import { ormOption } from "app/orm.config";
 @Module({
     imports: [
-        TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: process.env.POSTGRES_HOST,
-            port: process.env.POSTGRES_PORT,
-            username: process.env.POSTGRES_USER,
-            password: process.env.POSTGRES_PASSWORD,
-            database: process.env.POSTGRES_DB,
-        }),
+        ConfigModule.forRoot(),
+        TypeOrmModule.forRoot(ormOption),
         BookModule
     ],
-
+    exports: [TypeOrmModule]
 })
 export class AppModule {
 

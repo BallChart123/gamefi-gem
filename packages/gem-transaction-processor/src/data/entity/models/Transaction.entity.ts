@@ -5,11 +5,11 @@ export class Transaction {
     @PrimaryGeneratedColumn("uuid")
     transaction_id: number;
 
-    @Column('string')
-    book
+    @Column('varchar')
+    book: string;
 
     @Column('uuid')
-    journal_id
+    journal_id: number;
 
     @Column('decimal')
     debit: number;
@@ -23,7 +23,7 @@ export class Transaction {
     @Column('timestamp')
     timestamp: Date
 
-    @Column('datetime')
+    @Column('timestamp')
     datetime: Date;
 
 }

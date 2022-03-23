@@ -13,14 +13,16 @@ export class BookService {
         return await this.book.save(book);
     }
 
-    async findOneBook(name: string): Promise<Book> {
-        return await this.book.findOne({ where: { name } })
+    async findOneBook(id: string): Promise<Book> {
+        return await this.book.findOne({ where: { id } })
     }
     async findBook(): Promise<Book[]> {
         return await this.book.find();
     }
-    async deleteBook(name: string): Promise<Book> {
-        return await this.book.remove(Book, { data: name })
+    async deleteBook(id: string) {
+        const book = await this.book.findOne({ where: { id } })
+
+        return await this.book.delete(book)
     }
 
 }

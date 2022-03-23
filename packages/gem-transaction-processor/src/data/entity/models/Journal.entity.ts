@@ -3,15 +3,15 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Journal {
     @PrimaryGeneratedColumn("uuid")
-    journal_id: number;
+    journal_id: string;
 
-    @Column('string')
-    book
+    @Column('varchar')
+    book: string;
 
     @Column('timestamp')
     timestamp: Date
 
-    @Column('datetime')
+    @Column('timestamp')
     datetime: Date;
 
 }
