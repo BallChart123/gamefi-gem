@@ -40,5 +40,10 @@ export class TransactionController {
         });
     }
 
+    @Get("/balance/:userId")
+    @HttpCode(200)
+    async getTransactionByUserId(userId :string)  {
+        return await this.transactionService.findTransaction
 
+    }
 }

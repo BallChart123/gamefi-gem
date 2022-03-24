@@ -19,6 +19,7 @@ export class TransactionService {
     async findTransaction(): Promise<Transaction[]> {
         return this.transaction.find();
     }
+    
     async deleteTransaction(id: string) {
         const transaction = await this.transaction.findOne({ where: { id } })
         return await this.transaction.delete(transaction)
