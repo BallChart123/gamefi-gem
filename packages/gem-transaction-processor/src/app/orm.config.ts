@@ -19,9 +19,9 @@ export const ormOption = {
 export const ormConfig = {
     ...ormOption,
     migrationsTableName: "migrations",
-    migrations: ["src/migrations/*.ts"],
+    migrations: ["migrations/*.ts"],
     cli: {
-        "migrationsDir": "migrations/"
+        "migrationsDir": "/migrations"
     }
 }
 
